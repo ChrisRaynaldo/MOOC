@@ -30,9 +30,9 @@ function NarrowItDownDirectiveController(){
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
   var target = this
-    target.found,
-    target.searchTerm,
-    target.clicked = false,
+    target.found;
+    target.searchTerm;
+    target.clicked = false;
     target.noResult = function(){
       return target.found && !target.found.length && target.clicked;
     },
@@ -71,7 +71,7 @@ function MenuSearchService($http, ApiBasePath) {
     }).then(function (result) {
         var foundItems = [];
           result.data["menu_items"].forEach(function(currentItem, index) {
-            if(currentItem.description.indexOf(searchTerm) !== -1) {
+            if(currentItem.description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
               foundItems.push(currentItem);
             }
           });
